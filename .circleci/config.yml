@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - build:
-          template: packer.json
+          template: ami.json
           args: '-var aws_region=us-east-1'
 workflows:
   version: 2
