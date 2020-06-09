@@ -2,18 +2,13 @@ version: 2.1
 orbs:
   packer: salaxander/packer@0.1
 jobs:
-  build:
-    environment:
-      - USER: circleci
-      - AWS_DEFAULT_REGION: us-east-1
-  steps:
-    - checkout
-    - run:
-        name: Validate Packer Template
-        command: packer validate ami.json
-    - run:
-        name: Build Packer Image
-        command: packer build ami.json
+  packer-example:
+    executor: packer/default
+    steps:
+      - checkout
+      - build:
+          template: packer.json
+          args: '-var aws_region=us-east-1'
 workflows:
   version: 2
   packer:
