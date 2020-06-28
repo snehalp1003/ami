@@ -4,7 +4,7 @@
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
         "aws_region": "us-east-1",
         "subnet_id": "subnet-4cb12f01",
-        "source_ami": "ami-068663a3c619dd892",
+        "source_ami": "ami-085925f297f89fce1",
         "ssh_username": "ubuntu",
         "ami_users": "417316329881,262619488074"
 },
@@ -40,7 +40,14 @@
                 "sudo apt-get install maven -y",
                 "sudo apt-get install openjdk-8-jre -y",
                 "sudo apt-get install nodejs -y",
-                "sudo apt-get install npm -y"
+                "sudo apt-get install npm -y",
+                "sudo npm install pm2@latest -g",
+                "sudo apt-get install ruby -y",
+                "wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install",
+                "sudo chmod +x ./install",
+                "sudo ./install auto",
+                "sudo service codedeploy-agent start",
+                "sudo service codedeploy-agent status"
             ]
         }
     ]
