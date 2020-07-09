@@ -19,7 +19,7 @@
             "subnet_id": "{{user `subnet_id`}}",
             "source_ami": "{{user `source_ami`}}",
             "ssh_username": "{{user `ssh_username`}}",
-            "ami_name": "csye6225_a4_{{timestamp}}",
+            "ami_name": "csye6225_ubuntu_ami_{{timestamp}}",
             "ami_description": "Ubuntu AMI for CSYE 6225 - Summer 2020",
             "launch_block_device_mappings": [
                 {
@@ -43,11 +43,21 @@
                 "sudo apt-get install npm -y",
                 "sudo npm install pm2@latest -g",
                 "sudo apt-get install ruby -y",
+                "echo 'Downloading CodeDeploy'",
                 "wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install",
                 "sudo chmod +x ./install",
                 "sudo ./install auto",
                 "sudo service codedeploy-agent start",
-                "sudo service codedeploy-agent status"
+                "echo 'Started CodeDeploy Agent'",
+                "sudo service codedeploy-agent status",
+                "echo 'Downloading CloudWatch Agent'",
+                "sudo wget https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb",
+                "sudo chmod +x ./amazon-cloudwatch-agent.deb",
+                "sudo dpkg -i -E ./amazon-cloudwatch-agent.deb",
+                "sudo systemctl enable amazon-cloudwatch-agent",
+                "echo 'Enabling CloudWatch Agent'",
+                "sudo systemctl start amazon-cloudwatch-agent",
+                "echo 'Started CloudWatch Agent'"
             ]
         }
     ]
